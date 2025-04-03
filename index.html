@@ -1,0 +1,24 @@
+<html>
+    <script>
+        async function populateDiv(){
+            // alert("Hi")
+            const a = Number(document.getElementById("firstNum").value)
+            const b = Number(document.getElementById("secondNum").value)
+            // const element = document.getElementById("finalSum")
+            // element.innerHTML = a+b
+            try{
+                const response = await fetch(`http://localhost:8000/sum?a=${a}&b=${b}`)
+                const sum = await response.text()
+                document.getElementById('finalSum').innerHTML = sum
+            }catch(err){
+                console.log("Error fetching sum : ", err)
+            }
+        }
+    </script>
+    <body>
+        <input id="firstNum" oninput="populateDiv()" type="text" placeholder="First number"></input><br></br>
+        <input id="secondNum" oninput="populateDiv()" type="text" placeholder="Second number"></input><br></br>
+        <!-- <button onclick="populateDiv()">Sum</button><br></br> -->
+        <div id="finalSum"></div><br></br>
+    </body>
+</html>
